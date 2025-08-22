@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Nakshatra – Astronomy Society</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #000011;
+        color: white;
+        text-align: center;
+    }
+    header, section, footer { padding: 20px; }
+    h1, h2 { color: gold; }
+    ul { list-style: none; padding: 0; }
+    li { margin: 5px 0; }
+    img {
+        width: 200px;
+        border: 2px solid gold;
+        border-radius: 8px;
+        margin: 5px;
+    }
+    canvas#stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<header>
+    <h1>🌌 Nakshatra</h1>
+    <p>Astronomy & Space Society of NSUT</p>
+</header>
+
+<section>
+    <h2>About Us</h2>
+    <p>
+        Nakshatra isn’t just a society — it’s a journey beyond our blue planet.  
+        By day, we’re students; by night, we’re explorers charting the galaxies from our own campus grounds.  
+        We gather under starlit skies, not only to observe distant worlds through telescopes,  
+        but to share stories, spark curiosity, and imagine futures among the stars.  
+        Here, constellations become conversations, the Moon a familiar neighbour, and every shooting star a shared wish.  
+        Whether you dream of walking on Mars or simply love the quiet wonder of the night sky,  
+        Nakshatra is your cosmic family.
+    </p>
+</section>
+
+<section>
+    <h2>Events & Activities</h2>
+    <ul>
+        <li>🔭 <strong>Stargazing Nights:</strong> Lay back on the lawn, trace constellations, and watch planets drift across the dark.</li>
+        <li>🚀 <strong>Rocket Building:</strong> From blueprint to launch — experience the thrill of sending your creation skyward.</li>
+        <li>🛰 <strong>Space Quizzes & Talks:</strong> Test your astro‑IQ and hear from minds who’ve turned star‑dreams into careers.</li>
+        <li>📸 <strong>Astrophotography:</strong> Capture the Moon’s craters, Saturn’s rings, and the Milky Way’s glow with your own camera.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Gallery</h2>
+    <img src="https://source.unsplash.com/200x200/?space" alt="Space">
+    <img src="https://source.unsplash.com/200x200/?galaxy" alt="Galaxy">
+    <img src="https://source.unsplash.com/200x200/?planet" alt="Planet">
+</section>
+
+<section>
+    <h2>Join Us</h2>
+    <p>Email: nakshatra@example.com</p>
+    <p>Instagram: @nakshatra_nsut</p>
+</section>
+
+<footer>
+    &copy; 2025 Nakshatra Astronomy Society, NSUT
+</footer>
+
+<script>
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+let stars = [];
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+for (let i = 0; i < 100; i++) {
+    stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2,
+        speed: Math.random() * 0.5 + 0.2
+    });
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'white';
+    for (let s of stars) {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fill();
+        s.y += s.speed;
+        if (s.y > canvas.height) {
+            s.y = 0;
+            s.x = Math.random() * canvas.width;
+        }
+    }
+    requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
